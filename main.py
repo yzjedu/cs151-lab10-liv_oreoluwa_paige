@@ -1,18 +1,17 @@
-# Programmers: Oreoluwa Adebusoye, Liv Oakes, Paige
+# Programmers: Oreoluwa Adebusoye, Liv Oakes, Paige Ronan
 # Course: CS151, Zelalem Yalew
 # Due Date: 11/20
 # Programming Assignment: Lab 10
-# Problem Statement:
-# Data In:
-# Data Out:
-# Credits:
+# Problem Statement: analyze data on movies, their budgets, and their profits
+# Data In: file name
+# Data Out: table of movies with their profit and what movie had the highest profit
+# Credits: class resources
 
 import os
 
-# Purpose:
-# Name:
-# Parameters:
-# Return:
+# Purpose: read file on to a table
+# Parameters: filename
+# Return: table
 def read_file(filename):
     table = []
 
@@ -37,27 +36,26 @@ def read_file(filename):
 
 
 
-# Purpose:
-# Name:
-# Parameters:
-# Return:
+# Purpose: adding profit to table
+# Parameters: table
+# Return: table
 def add_profit(table):
     for row in table:
         # Extract the budget and worldwide gross
         budget = row[2]
+        domestic_gross = row[3]
         worldwide_gross = row[4]
 
         # Calculate the profit
-        profit = worldwide_gross - budget
+        profit = (domestic_gross +worldwide_gross) - budget
 
         # Append the profit to the row
         row.append(profit)
 
     return table
 
-# Purpose:
-# Name:
-# Parameters:
+# Purpose: to output the table
+# Parameters: table and output_file
 # Return:
 def write_list_to_file(table, output_file):
     # Open the file for writing
@@ -81,9 +79,18 @@ def write_list_to_file(table, output_file):
 
     print(f"Data successfully written to '{output_file}'.")
 
+#def highest profit():
+
+
 # Purpose:
-# Name:
 # Parameters:
 # Return:
 def main():
     input_file = input("Enter the input CSV file name: ")
+    while input_file != 'movies.csv':
+        print("Please enter a valid CSV file.")
+        input_file = input("Enter the input CSV file name: ")
+    read_file(input_file)
+    add_profit(read_file(input_file))
+    write_list_to_file(read_file(input_file), input_file)
+main()
