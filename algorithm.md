@@ -14,12 +14,12 @@ Tasks:
 3. Write the new table onto output file
 4. Main function
 
-
-Purpose:  Read movie data from a CSV file and store it in a list of lists (table).
-Name: read_data
-Parameters: file_name
-Return: table (list of lists)
-Algorithm:
+ 
+* Purpose:  Read movie data from a CSV file and store it in a list of lists (table).
+* Name: read_file
+* Parameters: file_name 
+* Return: table (list of lists)
+* Algorithm:
 1. Open the file specified by file_name for reading. 
 2. Create an empty list called names_table. 
 3. For each line in the file:
@@ -29,11 +29,11 @@ Algorithm:
 4. Close the file. 
 5. Return the table.
 
-Purpose: Update the table by adding a column to hold the profit
-Name: profit_column
-Parameters: table
-Return: The updated table with an additional profit column for each movie.
-Algorithm:
+* Purpose: Update the table by adding a column to hold the profit
+* Name: profit_column
+* Parameters: table
+* Return: The updated table with an additional profit column for each movie.
+* Algorithm:
 1. For each row in table:
    1. Extract the budget from row[2]
    2. Extract the worldwide_gross from row[4]
@@ -41,11 +41,11 @@ Algorithm:
    4. Append the profit value to the row.
 2. Return the updated table
 
-Purpose: Write the updated table with the profit column to a new CSV file.
-Name:  write_data
-Parameters: table, output file
-Return: None
-Algorithm:
+* Purpose: Write the updated table with the profit column to a new CSV file.
+* Name:  write_data
+* Parameters: table, output file
+* Return: None
+* Algorithm:
 1. Open the output file for writing.
 2. For each row in the table:
    1. Initialize an empty string line
@@ -56,11 +56,11 @@ Algorithm:
    4. Write the line to the output_file, followed by a newline character.
 3. Close the output_file.
 
-Purpose: Control the flow of the program 
-Name: Main() 
-Parameters: None
-Return: None
-Algorithm:
+* Purpose: Control the flow of the program 
+* Name: Main() 
+* Parameters: None
+* Return: None
+* Algorithm:
 1. Prompt the user to enter the input file name (input_file).
 2. Call read_data(input_file) to read the movie data into a table.
 3. Call add_profit_column(table) to calculate and add the profit column to the table.
