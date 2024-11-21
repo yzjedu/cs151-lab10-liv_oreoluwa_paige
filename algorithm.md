@@ -5,14 +5,9 @@
 Tasks:
 1. Read data from file to a table
 2. Update the table by adding value/element at each to hold the profit
-   3. For row in table:
-      4. budget =
-      5. demestic gross =
-      6. worldwide gross =
-      6. profit =
-      7. row.append(profit)
 3. Write the new table onto output file
-4. Main function
+4. Find and display the movie with the highest profit.
+5. Main function
 
  
 * Purpose:  Read movie data from a CSV file and store it in a list of lists (table).
@@ -42,7 +37,7 @@ Tasks:
 2. Return the updated table
 
 * Purpose: Write the updated table with the profit column to a new CSV file.
-* Name:  write_data
+* Name: write_list_to_file
 * Parameters: table, output file
 * Return: None
 * Algorithm:
@@ -55,15 +50,32 @@ Tasks:
    3. Remove the trailing comma from line.
    4. Write the line to the output_file, followed by a newline character.
 3. Close the output_file.
+4. Display a success message indicating that the file was written successfully.
+
+* Purpose: Identify and display the movie with the highest profit from the table.
+* Name: highest_profit_movie
+* Parameters: table (list of lists)
+* Return: None
+Algorithm:
+1. Initialize a variable max_profit_movie with the first row of the table. 
+2. Initialize a variable max_profit with the profit value from the first row (row[-1]). 
+3. For each row in the table:
+   1. Extract the profit value from the last column (row[-1]). 
+   2. If the profit is greater than max_profit:
+      1. Update max_profit with the current row’s profit. 
+      2. Update max_profit_movie with the current row.
+4. Display the details of the movie with the highest profit
 
 * Purpose: Control the flow of the program 
 * Name: Main() 
 * Parameters: None
 * Return: None
 * Algorithm:
-1. Prompt the user to enter the input file name (input_file).
-2. Call read_data(input_file) to read the movie data into a table.
-3. Call add_profit_column(table) to calculate and add the profit column to the table.
-4. Prompt the user to enter the output file name (output_file).
-5. Call write_data(table, output_file) to write the updated table to the output file.
-6. Find and display the movie with the highest or lowest profit.
+1. Display a welcome message to the user. 
+2. Prompt the user to enter the name of the input file (input_file). 
+3. Call read_file(input_file) to read the movie data into a table. 
+4. Call profit_column(table) to calculate and add the profit column to the table. 
+5. Prompt the user to enter the name of the output file (output_file). 
+6. Call write_data(table, output_file) to write the updated table to the output file. 
+7. Call highest_profit_movie(table) to find and display the movie with the highest profit. 
+8. Display a thank-you message to the user.

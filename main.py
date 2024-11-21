@@ -2,9 +2,11 @@
 # Course: CS151, Zelalem Yalew
 # Due Date: 11/20
 # Programming Assignment: Lab 10
-# Problem Statement: analyze data on movies, their budgets, and their profits
-# Data In: file name
-# Data Out: table of movies with their profit and what movie had the highest profit
+# Problem Statement: This program analyzes data on movies, their budgets, and their profits.
+#                    It calculates the profit for each movie, saves the updated data to a file,
+#                     and identifies the movie with the highest profit.
+# Data In: File name provided by the user (CSV file with movie data)
+# Data Out: A table of movies with their profit and Information about the movie with the highest profit displayed to the user.
 # Credits: class resources
 
 import os
@@ -22,6 +24,7 @@ def read_file():
         print("That file does not exist. Please try again.")
         file_name = input("\nWhat file do you want to read? ")
 
+    # Initialize an empty list to store the movie data table
     table = []
 
     try:
@@ -47,7 +50,9 @@ def read_file():
 # Parameters: table (list of lists)
 # Return: The updated table with an additional profit column.
 def profit_column(table):
+    # Iterate through each row in the table
     for row in table:
+
         # Extract the budget and worldwide gross
         budget = row[2]
         worldwide_gross = row[4]
@@ -60,11 +65,12 @@ def profit_column(table):
 
     return table
 
-# Purpose: to output the table
-# Parameters: table and output_file
-# Return:
+# Purpose: Write the updated table with the profit column to a new CSV file.
+# Name: write_list_to_file
+# Parameters: table (list of lists), output_file
+# Return: None
 def write_list_to_file(table, output_file):
-    # Open the file for writing
+    # Open the output file for writing
     fd = open(output_file, "w")
 
     for row in table:
@@ -84,7 +90,7 @@ def write_list_to_file(table, output_file):
     # Close the file
     fd.close()
 
-    print(f"Data successfully written to '{output_file}'.")
+    print(f"\nData successfully written to '{output_file}'.")
 
 # Purpose: Find and display the movie with the highest profit.
 # Name: highest_profit_movie
@@ -95,20 +101,21 @@ def highest_profit_movie(table):
     max_profit_movie = table[0]
     max_profit = max_profit_movie[-1]  # The first movie's profit
 
+    # Iterate through the table to find the movie with the highest profit
     for row in table:
         profit = row[-1]  # Profit is the last column in the row
         if profit > max_profit:
             max_profit = profit
             max_profit_movie = row
 
-    # Display the result
+    # Display the details of the movie with the highest profit
     print("\nMovie with the highest profit:")
     print(f"Release Date: {max_profit_movie[0]}")
     print(f"Title: {max_profit_movie[1]}")
-    print(f"Budget: {max_profit_movie[2]}")
-    print(f"Domestic Gross: {max_profit_movie[3]}")
-    print(f"Worldwide Gross: {max_profit_movie[4]}")
-    print(f"Profit: {max_profit_movie[5]}")
+    print(f"Budget: ${max_profit_movie[2]:,d}")
+    print(f"Domestic Gross: ${max_profit_movie[3]:,d}")
+    print(f"Worldwide Gross: ${max_profit_movie[4]:,d}")
+    print(f"Profit: ${max_profit_movie[5]:,d}")
 
 
 # Purpose: Control the flow of the program.
@@ -116,11 +123,31 @@ def highest_profit_movie(table):
 # Parameters: None
 # Return: None
 def main():
-    input_file = input("Enter the input CSV file name: ")
-    while input_file != 'movies.csv':
-        print("Please enter a valid CSV file.")
-        input_file = input("Enter the input CSV file name: ")
-    read_file(input_file)
-    add_profit(read_file(input_file))
-    write_list_to_file(read_file(input_file), input_file)
+    # Intro message
+    print("**************************************************")
+    print(" Welcome to the Movie Profit Analysis Program! ")
+    print("**************************************************")
+    print("\nThis program helps you analyze movie data from a CSV file.")
+    print("\nLet's get started!\n")
+
+    # Read the file into a table
+    table = read_file()
+
+    # Add the profit column
+    table = profit_column(table)
+
+    # Prompt the user for the output file name
+    output_file = input("\nEnter the output CSV file name: ")
+
+    # Write the updated table to the output file
+    write_list_to_file(table, output_file)
+
+    # Find and display the movie with the highest profit
+    highest_profit_movie(table)
+
+    # Exit message
+    print("\n**************************************************")
+    print(" Thank you for using the Movie Profit Analysis Program!")
+    print("**************************************************")
+
 main()
